@@ -2,6 +2,12 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+*,
+*:before,
+*:after {
+  @apply box-border m-0;
+}
+
 .hero img {
     height: 65vh;
     background-image: linear-gradient(180deg, #451C60 0%, #352F4496 80%);

@@ -1,8 +1,8 @@
 <template>
-    <div id="hero" class="hero-img">
+    <div id="hero" class="hero-img hero-pattern">
         <div class="home-main flex flex-col justify-center items-center">
-            <h1 class="text-white text-6xl">{{title}}</h1>
-            <h3 class="text-xl italic text-white">{{subTitle}}</h3>              
+            <h1 class="text-bookish-light text-6xl">{{title}}</h1>
+            <h3 class="text-xl italic text-bookish-light">{{subTitle}}</h3>              
         </div>
     </div>
 </template>
@@ -25,7 +25,7 @@ export default {
 }
 
 .hero-img {
-  background-image: linear-gradient(180deg, #451C60 0%, #352F4496 80%), url("~assets/bg.jpg");
+  background-image: linear-gradient(180deg, #64405a 0%, #352F4496 80%), url("~assets/bg.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
