@@ -7,7 +7,7 @@
             <nav>
                 <ul class="flex justify-center">
                     <li v-for="(link, index) in links" :key="index" class="px-2 py-4">
-                        <nuxt-link class="link text-bookish-light text-md font-bold" :to="link.url">
+                        <nuxt-link class="link text-bookish-light text-md font-bold tracking-wide" :to="link.url">
                             {{ link.name }}
                         </nuxt-link>
                     </li>
@@ -32,7 +32,7 @@ export default {
         scrollFunction() {
             window.onscroll = () => {
                 if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 50) {
-                    document.getElementById("navbar").style.background = "#64405a";
+                    document.getElementById("navbar").style.background = "#864d7f";
                     document.getElementById("navbar").style.color = "#FCF4F0";
                     document.getElementById("navbar").style.transition = "all 0.5s";
                 } else {
