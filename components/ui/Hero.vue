@@ -1,8 +1,11 @@
 <template>
     <div id="hero" class="hero-img hero-pattern">
         <div class="home-main flex flex-col justify-center items-center">
-            <h1 class="text-bookish-light text-6xl">{{title}}</h1>
-            <h3 class="text-xl italic text-bookish-light">{{subTitle}}</h3>              
+            <h1 class="text-bookish-light text-6xl x:text-center">{{title}}</h1>
+            <h3 class="text-xl italic text-bookish-light x:text-center">{{subTitle}}</h3> 
+            <span>
+                <i class="fas fa-bars"></i>
+            </span>  
         </div>
     </div>
 </template>
@@ -13,7 +16,7 @@ export default {
     data () {
         return {
             title: 'Caros Bookish',
-            subTitle: 'Compulsive R eader, Book Blogger and Reviewer',
+            subTitle: 'Compulsive Reader, Book Blogger and Reviewer',
         }
     },
 }
