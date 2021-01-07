@@ -12,7 +12,7 @@
 			class="mt-20">
 				<div class="grid grid-cols-2 gap-8" v-for="(book, item ) of books" :key="item">
 					<div class="flex justify-center top-reviews-img">
-						<img :src="book.image" :alt="book.title">
+						<img :src="book.image" :alt="book.title" class="object-cover">
 					</div>
 					<div class="flex flex-col justify-center top-review-summary">
 						<div class="-top-review-author">
@@ -24,20 +24,22 @@
 						<div class="top-review-preview mt-5">
 							<p class=" text-sm text-bookish-gray">{{book.summary}}</p>
 						</div>
-						<button class="rounded px-4 py-3 bg-bookish-primary mt-5 text-bookish-white font-bold cursor-pointer w-40 hover:opacity-75 transition duration-500 ease-in-out">Leer Resena</button>
+						<button class="rounded px-4 py-3 bg-bookish-primary mt-5 text-bookish-white font-bold cursor-pointer w-40 hover:opacity-75 transition duration-500 ease-in-out">
+							Leer Resena
+						</button>
 					</div>
 				</div>
 			</carousel>
 		</section>
 
-		<section class="mt-24">
+		<section class="mt-24 bg-gradient-to-t from-bookish-light to-bookish-white">
 			<div class="latest-reviews p-10">
 				<div class="section-title">
 					<h3 class="text-center text-4xl font-semibold text-bookish-main py-10">Latest Reviews</h3>
 				</div>
 				<div class="min-h-full w-full flex items-center">
 					<div class="container mx-auto flex flex-wrap justify-center">
-						<div
+						<article
 						v-for="(book, item) in books" :key="item" 
 						class="bg-bookish-white w-full max-w-sm rounded-xl border-bookish-dark flex flex-col mx-auto mb-10 mt-2 shadow-md md:ml-4 md:mr-4">
 							<img :src="book.image" class="object-cover h-64 hover:opacity-75 transition duration-500 ease-in-out rounded-t-xl">
@@ -55,12 +57,12 @@
 									<h3 class=" text-bookish-primary text-base font-semibold">{{book.editorials[0]}}</h3>
 								</div>
 								<div class="mr-2">
-									<nuxt-link to="#" class="uppercase text-bookish-main text-xs font-bold hover:opacity-75 transition duration-500 ease-in-out">
+									<nuxt-link :to="/books/+book.isbn" class="uppercase text-bookish-main text-xs font-bold hover:opacity-75 transition duration-500 ease-in-out">
 										Read more
 									</nuxt-link>	
 								</div>
 							</div>
-						</div>
+						</article>
 					</div>
 				</div>
 				<!-- Pagination -->
@@ -84,7 +86,7 @@
 		<section>
 			<div class="reading-spanish">
 				<div class="section-title">
-					<h3 class="text-center text-4xl font-semibold text-bookish-main py-10">Reading Spanish</h3>
+					<h3 class="text-center text-4xl font-semibold text-bookish-main py-10">My TBR</h3>
 				</div>
 				<div class="card-reading grid grid-cols-5 gap-4 p-10">
 					<div class="content" v-for="(bookInfo, item) in books" :key="item">
@@ -119,7 +121,7 @@ export default {
 		}
 	},
 	 async fetch() {
-		 this.books = await fetch('http://carosbookish.com/web/admin_dev.php/api/book/list?limit=6')
+		 this.books = await fetch('http://carosbookish.com/web/admin_dev.php/api/book/list?limit=12')
 		 .then(res => res.json())
 	 },
 
@@ -144,7 +146,6 @@ export default {
 }
 
 .top-reviews-img img {
-	object-fit: cover;
 	width: 40vw;
 	height: 400px;
 }

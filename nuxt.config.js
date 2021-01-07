@@ -9,7 +9,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap'}
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Abel&family=Cinzel+Decorative:wght@400;700&family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap'}
     ]
   },
 
@@ -29,6 +29,20 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    ['@nuxtjs/fontawesome', {
+      component: 'fa', //customize component name
+      imports: [{
+          set: '@fortawesome/free-solid-svg-icons',
+          icons: ['faStar', 'faGlobe']
+          },
+          {set: '@fortawesome/free-brands-svg-icons',
+          icons: ['faGoodreadsG', 'faTwitter', 'faInstagram', 'faPinterestP', 'faFacebookF', 'faApple', 'faAmazon']
+          },
+          {set: '@fortawesome/free-regular-svg-icons',
+          icons: ['faLightbulb']
+          },
+      ]
+   }]
   ],
 
   tailwindcss: {
@@ -37,7 +51,6 @@ export default {
     exposeConfig: false,
     config: {}
   },
-
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     // https://go.nuxtjs.dev/axios
