@@ -1,7 +1,7 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'carosbookish',
+    title: `Caro's Bookish`,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -9,7 +9,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Abel&family=Cinzel+Decorative:wght@400;700&family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap'}
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Abel&family=Cinzel+Decorative:wght@400;700&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=Raleway:wght@400;700&family=Redressed&display=swap'}
     ]
   },
 
