@@ -27,7 +27,7 @@
 									<h3 class=" text-bookish-primary text-base font-semibold">{{book.editorials[0]}}</h3>
 								</div>
 								<div class="mr-2">
-									<nuxt-link :to="/books/+book.isbn" class="uppercase text-bookish-main text-sm font-bold hover:opacity-75 transition duration-500 ease-in-out">
+									<nuxt-link :to="/book/+book.strategy" class="uppercase text-bookish-main text-sm font-bold hover:opacity-75 transition duration-500 ease-in-out">
 										Read more
 									</nuxt-link>	
 								</div>
@@ -62,7 +62,7 @@
 									<h3 class=" text-bookish-primary text-base font-semibold">{{book.editorials[0]}}</h3>
 								</div>
 								<div class="mr-2">
-									<nuxt-link :to="/books/+book.isbn" class="uppercase text-bookish-main text-xs font-bold hover:opacity-75 transition duration-500 ease-in-out">
+									<nuxt-link :to="/book/+book.strategy" class="uppercase text-bookish-main text-xs font-bold hover:opacity-75 transition duration-500 ease-in-out">
 										Read more
 									</nuxt-link>	
 								</div>
@@ -138,7 +138,7 @@
 									<h3 class=" text-bookish-primary text-base font-semibold">{{book.editorials[0]}}</h3>
 								</div>
 								<div class="mr-2">
-									<nuxt-link :to="/books/+book.isbn" class="uppercase text-bookish-main text-sm font-bold hover:opacity-75 transition duration-500 ease-in-out">
+									<nuxt-link :to="/book/+book.strategy" class="uppercase text-bookish-main text-sm font-bold hover:opacity-75 transition duration-500 ease-in-out">
 										Read more
 									</nuxt-link>	
 								</div>
@@ -177,7 +177,7 @@ export default {
 	// },
 
 	async fetch() {
-		this.books = await fetch('http://carosbookish.com/web/admin_dev.php/api/book/list?limit=12`')
+		this.books = await fetch('https://carosbookish.com/web/admin_dev.php/api/book/list')
 		.then(res => res.json())
 	}, 
 
