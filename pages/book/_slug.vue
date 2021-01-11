@@ -25,7 +25,7 @@
                                     <p class="mt-3 text-sm tracking-wide leading-6 text-bookish-gray" v-html="bookDetails.authors[0].description"></p>
                                     <div  class="flex items-center mt-5 social-icon">
                                         <a v-for="(iconSocial, item) in bookDetails.authors[0].social_networks" :key="item" :href="iconSocial.url" target="_blank" class="w-10 h-10 bg-bookish-main text-bookish-white rounded-full mr-3">
-                                            <fa :icon="['fab', 'instagram']"  class="icon"/>
+                                            <fa :icon="['fab', iconSocial.icon]"  class="icon"/>
                                         </a>   
                                     </div>
                                 </div>
@@ -51,38 +51,39 @@
                     </div>
                 </div>
                 <div class="col-span-4 px-4">
-                    <section class="bg-bookish-light rounded-md p-4">
+                    <div class="bg-bookish-light rounded-md p-4">
                         <div class="relative w-full">
                             <img :src="bookDetails.image" :alt="bookDetails.name" class="w-full">
                         </div>
-                        <div class="flex justify-around items-center mt-5 px-16">
-                            <fa v-for="(n, item) in bookDetails.star" :key="item" :icon="['fas','star']"  class="fa-2x text-bookish-main"/>
-                            {{n}}
+                        <div class="flex justify-around items-center mt-5 px-20">
+                            <fa v-for="star in bookDetails.review.star" :key="star" :icon="['fas','star']"  class="fa-2x text-bookish-main"/>
+                            {{star}}
                         </div>
                         <div class="px-8 mt-10 text-bookish-gray">
                             <div class="flex items-center">
                                 <span class="font-bold mr-2">ISBN:</span>
-                                <span class="text-sm">123456789</span>
+                                <span class="text-sm">{{bookDetails.isbn}}</span>
                             </div>
                             <div class="flex items-center mt-1">
                                 <span class="font-bold mr-2">Editorial:</span>
-                                <span class="text-sm">Titania</span>
+                                <span class="text-sm">{{bookDetails.editorials[0]}}</span>
                             </div>
                             <div class="flex items-center mt-1">
                                 <span class="font-bold mr-2">Serie:</span>
-                                <span class="text-sm">Los Calaveras Redimidos</span>
+                                <span class="text-sm">{{bookDetails.serie_number}}</span>
                             </div>
                             <div class="flex items-center mt-1">
                                 <span class="font-bold mr-2">Genero:</span>
-                                <span class="text-sm">Romantica Historica</span>
+                                <span class="text-sm">{{bookDetails.genres[0]}}</span>
                             </div>
                             <div class="flex items-center mt-1">
                                 <span class="font-bold mr-2">Fecha:</span>
-                                <span class="text-sm">12/01/2021</span>
+                                <span class="text-sm">{{bookDetails.publication_at.date | formatDate}}
+                                </span>
                             </div>
                             <div class="flex items-center mt-1">
                                 <span class="font-bold mr-2">N. page:</span>
-                                <span class="text-sm">352</span>
+                                <span class="text-sm">{{bookDetails.page_number}}</span>
                             </div>
                         </div>
                         <div class="mt-5 p-4">
@@ -105,8 +106,26 @@
                                 </nuxt-link>
                             </div>
                         </div>
-                    </section>
+                    </div>
                 </div>
+            </section>
+            <section class="mt-24 px-10">        
+                <h3 class="text-2xl text-bookish-main font-bold border-b-2 border-fuchsia-600 w-full pb-2">Libros Relacionados</h3>
+                <carousel 
+                    :autoplay="true" 
+                    :items="5" 
+                    :autoplayTimeout="2000"
+                    :nav="false"
+                    :autoplayHoverPause="true"
+                    :loop="true"
+                    :dots="false"
+                    class="mt-8">
+                        <div class="flex justify-center" v-for="(bookCover, item) of bookDetails.relation" v-bind="bookCover" :key="item">
+                            <a :href="bookCover.strategy">
+                                <img :src="bookCover.image" class="w-full p-2">
+                            </a>
+                        </div>
+                    </carousel>
             </section>
         </main>
         <Footer/>
@@ -114,6 +133,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'Book',
     data() {
@@ -125,7 +146,27 @@ export default {
     async fetch() {
 		this.bookDetails = await fetch(`https://carosbookish.com/web/admin_dev.php/api/book/`+this.$route.params.slug)
         .then(res => res.json())
-	}
+    },
+    
+    filters: {
+        formatDate(value) {
+            let options = {month: 'short', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'};
+            return value.toLocaleString(['en-US'], options);
+        }
+    },
+
+    head () {
+        return {
+            title: `${this.bookDetails.name} | Caros Bookish`,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: `${this.bookDetails.summary}`, 
+                }
+        ]
+        }
+    }
 }
 </script>
 

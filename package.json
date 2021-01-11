@@ -8,6 +8,11 @@
     "start": "nuxt start",
     "generate": "nuxt generate"
   },
+  "config": {
+    "nuxt": {
+      "port": "3000"
+    }
+  },
   "dependencies": {
     "@fortawesome/free-regular-svg-icons": "^5.15.1",
     "@nuxtjs/axios": "^5.12.2",

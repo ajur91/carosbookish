@@ -8,7 +8,7 @@
 				<div class="flex flex-col justify-center items-center">
 					<h3 class="text-bookish-main text-3xl font-bold text-centet uppercase">Lasted Post</h3>
 					<div class="line"></div>
-					<div class="min-h-full flex flex-wrap justify-center items-center mt-10 border-b-4 border-bookish-main">
+					<div class="min-h-full grid grid-cols-3 justify-center items-center mt-10 border-b-4 border-bookish-main">
 						<article
 						v-for="(book, item) in limitBooks(0, 3)" :key="item"
 						class="bg-bookish-white w-full max-w-sm rounded-xl border-bookish-dark flex flex-col mx-auto mb-10 mt-2 shadow-lg md:ml-4 md:mr-4">
@@ -94,19 +94,19 @@
 					<div class="line"></div>
 				</div>
 				<div class="card-reading grid grid-cols-6 gap-4 p-10">
-					<div class="content" v-for="(bookInfo, item) in limitBooks(0, 6)" :key="item">
+					<div class="content" v-for="(book, item) in limitBooks(0, 6)" :key="item">
 						<div class="content-overlay"></div>
 							<nuxt-link to="/">
-								<img :src="bookInfo.image" class="w-full h-full">
+								<img :src="book.image" class="w-full h-full">
 							</nuxt-link>
 						<div class="content-details fadeIn-top">
 							<h1 class="text-2xl leading-2 font-bold uppercase text-bookish-white">
 								<nuxt-link to="/">
-									{{bookInfo.title}}
+									{{book.title}}
 								</nuxt-link>
 							</h1>
 							<div class="border-0 text-bookish-dark text-center inline-block cursor-pointer px-3 py-1 rounded bg-bookish-medium mt-4">
-									<a class="text-sm tracking-wide uppercase" href="">Read More</a> 
+									<a class="text-sm tracking-wide uppercase" :href="/book/+book.strategy">Read More</a> 
 							</div>
 						</div>
 					</div>
@@ -153,8 +153,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
 	data() {
 		return {
@@ -166,15 +164,9 @@ export default {
 
 	methods: {
 		limitBooks: function(min, max) {
-			return this.books.slice(min, max)
+			return this.books.reverse().slice(min, max)
 	 	}
 	},
-
-	// computed: {
-	// 	limitBooks: function(min, max) {
-	// 		this.books.slice(min, max)
-	// 	}
-	// },
 
 	async fetch() {
 		this.books = await fetch('https://carosbookish.com/web/admin_dev.php/api/book/list')
