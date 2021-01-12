@@ -25,7 +25,7 @@
                                     <p class="mt-3 text-sm tracking-wide leading-6 text-bookish-gray" v-html="bookDetails.authors[0].description"></p>
                                     <div  class="flex items-center mt-5 social-icon">
                                         <a v-for="(iconSocial, item) in bookDetails.authors[0].social_networks" :key="item" :href="iconSocial.url" target="_blank" class="w-10 h-10 bg-bookish-main text-bookish-white rounded-full mr-3">
-                                            <fa :icon="['fab', iconSocial.icon]"  class="icon"/>
+                                            <fa :icon="iconSocial.icon"  class="icon"/>
                                         </a>   
                                     </div>
                                 </div>
@@ -51,13 +51,13 @@
                     </div>
                 </div>
                 <div class="col-span-4 px-4">
-                    <div class="bg-bookish-light rounded-md p-4">
+                    <div  class="bg-bookish-light rounded-md p-4">
                         <div class="relative w-full">
                             <img :src="bookDetails.image" :alt="bookDetails.name" class="w-full">
                         </div>
-                        <div class="flex justify-around items-center mt-5 px-20">
+                        <div v-if="bookDetails.has_review === true" class="flex justify-around items-center mt-5 px-20">
                             <fa v-for="star in bookDetails.review.star" :key="star" :icon="['fas','star']"  class="fa-2x text-bookish-main"/>
-                            {{star}}
+                                {{star}}
                         </div>
                         <div class="px-8 mt-10 text-bookish-gray">
                             <div class="flex items-center">
@@ -157,14 +157,14 @@ export default {
 
     head () {
         return {
-            title: `${this.bookDetails.name} | Caros Bookish`,
+            title: `${this.bookDetails.name} by ${this.bookDetails.authors[0].name}| Caros Bookish`,
             meta: [
                 {
                     hid: 'description',
                     name: 'description',
                     content: `${this.bookDetails.summary}`, 
                 }
-        ]
+            ]
         }
     }
 }
