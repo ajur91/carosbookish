@@ -4,7 +4,7 @@
         <div class="hero-img bg-center bg-no-repeat bg-cover relative blur" :style="{ backgroundImage: `url(${bookDetails.image})` }">
             <div class="home-main flex flex-col justify-center items-center">
                 <h2 class="text-bookish-white text-5xl x:text-center z-10">{{bookDetails.name}}</h2>
-                <h3 class="text-bookish-white text-3xl x:text-center font-bold z-10 mt-2">{{bookDetails.authors[0].name}}</h3>
+                <!-- <h3 class="text-bookish-white text-3xl x:text-center font-bold z-10 mt-2">{{bookDetails.authors[0].name}}</h3> -->
                 <h4 class="text-bookish-white text-2xl x:text-center font-bold z-10 mt-2">{{bookDetails.editorials[0]}}</h4>
             </div>
         </div>
@@ -19,14 +19,14 @@
                         <aside class="info-author mt-20">
                             <h3 class="text-4xl font-bold text-bookish-dark">Sobre el autor</h3>
                             <div class="bg-bookish-light rounded-xl mt-5 p-8 mx-auto flex items-center">
-                                <img class="w-56 h-56 rounded-full border-bookish-main border-4" :src="bookDetails.authors[0].image" alt="">
+                                <!-- <img class="w-56 h-56 rounded-full border-bookish-main border-4" :src="bookDetails.authors[0].image" alt=""> -->
                                 <div class="text-left ml-5">
-                                    <h2 class="text-bookish-main font-bold text-2xl">{{bookDetails.authors[0].name}}</h2>
-                                    <p class="mt-3 text-sm tracking-wide leading-6 text-bookish-gray" v-html="bookDetails.authors[0].description"></p>
+                                    <!-- <h2 class="text-bookish-main font-bold text-2xl">{{bookDetails.authors[0].name}}</h2> -->
+                                    <!-- <p class="mt-3 text-sm tracking-wide leading-6 text-bookish-gray" v-html="bookDetails.authors[0].description"></p> -->
                                     <div  class="flex items-center mt-5 social-icon">
-                                        <a v-for="(iconSocial, item) in bookDetails.authors[0].social_networks" :key="item" :href="iconSocial.url" target="_blank" class="w-10 h-10 bg-bookish-main text-bookish-white rounded-full mr-3">
+                                        <!-- <a v-for="(iconSocial, item) in bookDetails.authors[0].social_networks" :key="item" :href="iconSocial.url" target="_blank" class="w-10 h-10 bg-bookish-main text-bookish-white rounded-full mr-3">
                                             <fa :icon="iconSocial.icon"  class="icon"/>
-                                        </a>   
+                                        </a> -->
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                             </nuxt-link>
                             <nuxt-link to="/" class="w-10 h-10 bg-bookish-main text-bookish-white rounded-full">
                                 <fa :icon="['fab','facebook-f']"  class="icon"/>
-                            </nuxt-link>  
+                            </nuxt-link>
                         </div>
                     </div>
                     <div class="comments mt-20 px-2 py-3">
@@ -92,17 +92,17 @@
                         <div class="mt-5 p-4">
                             <h4 class="text-2xl font-bold text-center text-bookish-dark">Encontrar este libro en:</h4>
                             <div class="flex flex-wrap justify-center items-center">
-                                <nuxt-link to="/" class="flex items-center px-3 py-2 mt-4 mr-2 bg-bookish-main text-bookish-light rounded-md text-sm tracking-wide hover:opacity-75 hover:text-bookish-white uppercase"> 
+                                <nuxt-link to="/" class="flex items-center px-3 py-2 mt-4 mr-2 bg-bookish-main text-bookish-light rounded-md text-sm tracking-wide hover:opacity-75 hover:text-bookish-white uppercase">
                                     <span class="mr-2">
                                         <fa :icon="['fab','goodreads-g']" class="fa-lg"/>
                                     </span> Goodreads
                                 </nuxt-link>
-                                <nuxt-link to="/" class="flex items-center px-3 py-2 mt-4 mr-2 bg-bookish-main text-bookish-light rounded-md text-sm tracking-wide hover:opacity-75 hover:text-bookish-white uppercase"> 
+                                <nuxt-link to="/" class="flex items-center px-3 py-2 mt-4 mr-2 bg-bookish-main text-bookish-light rounded-md text-sm tracking-wide hover:opacity-75 hover:text-bookish-white uppercase">
                                     <span class="mr-2">
                                         <fa :icon="['fab','amazon']" class="fa-lg"/>
                                     </span> Amazon
                                 </nuxt-link>
-                                <nuxt-link to="/" class="flex items-center px-3 py-2 mt-4 bg-bookish-main text-bookish-light rounded-md text-sm tracking-wide hover:opacity-75 hover:text-bookish-white uppercase"> 
+                                <nuxt-link to="/" class="flex items-center px-3 py-2 mt-4 bg-bookish-main text-bookish-light rounded-md text-sm tracking-wide hover:opacity-75 hover:text-bookish-white uppercase">
                                     <span class="mr-2">
                                         <fa :icon="['fab','apple']" class="fa-lg"/>
                                     </span> iBooks
@@ -118,11 +118,11 @@
                     </div>
                 </div>
             </section>
-            <section class="mt-24 px-10">        
+            <section class="mt-24 px-10">
                 <h3 class="text-2xl text-bookish-main font-bold border-b-2 border-fuchsia-600 w-full pb-2">Libros Relacionados</h3>
-                <carousel 
-                    :autoplay="true" 
-                    :items="5" 
+                <carousel
+                    :autoplay="true"
+                    :items="5"
                     :autoplayTimeout="2000"
                     :nav="false"
                     :autoplayHoverPause="true"
@@ -138,7 +138,7 @@
             </section>
         </main>
         <Footer/>
-    </div>    
+    </div>
 </template>
 
 <script>
@@ -148,7 +148,46 @@ export default {
     name: 'Book',
     data() {
         return {
-            bookDetails: [],
+            bookDetails: {
+              id: null,
+              isbn: null,
+              name: "",
+              series: [],
+              genres: [],
+              authors: [],
+              editorials: [],
+              stickers: [],
+              summary: "",
+              translator: "",
+              format: "",
+              synopsis: "",
+              page_number: null,
+              serie_number: null,
+              publication_at: {
+                date: null,
+                timezone_type: null,
+                timezone: null
+              },
+              edition: null,
+              language: null,
+              popular: null,
+              image: null,
+              comments: {},
+              purchases: [],
+              status: null,
+              is_active: null,
+              created_at: null,
+              updated_at: null,
+              name_es: null,
+              name_en: null,
+              strategy: null,
+              relation: [],
+              has_review: true,
+              review: {
+                description: null,
+                star: null
+              }
+            }
         }
     },
 
@@ -159,12 +198,12 @@ export default {
 
     head () {
             return {
-                title: `${this.bookDetails.name} by ${this.bookDetails.authors[0].name}| Caros Bookish`,
+                title: `${this.bookDetails.name}| Caros Bookish`,
                 meta: [
                     {
                         hid: 'description',
                         name: 'description',
-                        content: `${this.bookDetails.summary}`, 
+                        content: `${this.bookDetails.summary}`,
                     }
                 ]
             }
