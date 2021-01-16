@@ -48,6 +48,9 @@
                     </div>
                     <div class="comments mt-20 px-2 py-3">
                         <h5 class="text-center text-sm font-bold text-bookish-main">¡Anímate a comentar! Los blogs se alimentan de comentarios y estaría encantada de leer tú opinión. Recuerda por favor no hacer spam, así no tendré que eliminar el comentario. ¡Espero leerte pronto!</h5>
+                        <div class="mt-10">
+                            <Disqus shortname='caros-bookish' />
+                        </div>
                     </div>
                 </div>
                 <div class="col-span-4 px-4">
@@ -107,6 +110,12 @@
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <h4>Leyendo</h4>
+                        <div>
+                            <img :src="bookDetails.is_active" alt="">
+                        </div>
+                    </div>
                 </div>
             </section>
             <section class="mt-24 px-10">        
@@ -141,32 +150,25 @@ export default {
         return {
             bookDetails: [],
         }
-    },    
+    },
 
     async fetch() {
-		this.bookDetails = await fetch(`https://carosbookish.com/web/admin_dev.php/api/book/`+this.$route.params.slug)
-        .then(res => res.json())
-    },
-    
-    filters: {
-        formatDate(value) {
-            let options = {month: 'short', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'};
-            return value.toLocaleString(['en-US'], options);
-        }
+	 	this.bookDetails = await fetch(`https://carosbookish.com/web/admin_dev.php/api/book/`+this.$route.params.slug)
+         .then(res => res.json())
     },
 
     head () {
-        return {
-            title: `${this.bookDetails.name} by ${this.bookDetails.authors[0].name}| Caros Bookish`,
-            meta: [
-                {
-                    hid: 'description',
-                    name: 'description',
-                    content: `${this.bookDetails.summary}`, 
-                }
-            ]
+            return {
+                title: `${this.bookDetails.name} by ${this.bookDetails.authors[0].name}| Caros Bookish`,
+                meta: [
+                    {
+                        hid: 'description',
+                        name: 'description',
+                        content: `${this.bookDetails.summary}`, 
+                    }
+                ]
+            }
         }
-    }
 }
 </script>
 

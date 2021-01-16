@@ -153,7 +153,18 @@
 </template>
 
 <script>
+import axios from 'axios';
+import NavBar from '~/components/ui/NavBar.vue';
+import Hero from '~/components/ui/Hero.vue';
+import Footer from '~/components/ui/Footer';
+
 export default {
+	components: {
+		NavBar,
+		Hero,
+		Footer,
+	},
+
 	data() {
 		return {
 			title: `Caro's Bookish`,
@@ -165,13 +176,13 @@ export default {
 	methods: {
 		limitBooks: function(min, max) {
 			return this.books.reverse().slice(min, max)
-	 	}
+		 },
 	},
 
-	async fetch() {
-		this.books = await fetch('https://carosbookish.com/web/admin_dev.php/api/book/list')
-		.then(res => res.json())
-	}, 
+	 async fetch() {
+	 	this.books = await fetch('https://carosbookish.com/web/admin_dev.php/api/book/list')
+	 	.then(res => res.json())
+	 }, 
 
 	head() {
 		return {

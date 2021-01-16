@@ -1,17 +1,8 @@
-const fetchData = async () => {
-    try {
-        const res = await fetch('https://pokeapi.co/api/v2/pokemon/');
-        const json = await res.json();
-        console.log(json)
+const urlAPI = 'https://carosbookish.com/web/admin_dev.php/api/book/';
 
-    } catch (error) {
-        console.log(error)
-    }
+function getBooks() {
+    return fetch(
+      `${urlAPI}+this.$route.params.slug`)
+      .then(res => res.json())
+      .then(res => res.booksDetails);
 }
-
-function getRandom(min, max) {
-    return Math.floor(Math.random() * (max -min)) +min;
-}
-
-fetchData();
-console.log(getRandom(1, 151))
